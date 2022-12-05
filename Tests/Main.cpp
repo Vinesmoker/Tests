@@ -1,18 +1,19 @@
 #include<iostream>
 using namespace std;
 
-void Rand(int arr[], const int n, int min = 0, int max = 9);
+void Rand(int arr[], const int n, int min = 70, int max = 80);
 void Print(int arr[], const int n);
 int minValueIn(int arr[], const int n);
 int maxValueIn(int arr[], const int n);
 void ShiftLeft(int arr[], const int n, int numOfShifts);
 void ShiftRight(int arr[], const int n, int numOfShifts);
+void Search(int arr[], int arr2[], const int n);
 int Unique(int arr[], const int n);
 
 void main ()
 {
 	const int n = 10;
-	int arr[n] = {};
+	int arr[n] = {}; int arr2[n]{};
 	int numOfShifts;
 	Rand(arr, n);
 	Print(arr, n);
@@ -22,8 +23,11 @@ void main ()
 	ShiftLeft(arr, n, numOfShifts);
 	cout << endl;
 	ShiftRight(arr, n, numOfShifts);
+	cout << "Searching of repetitions: " << endl;
+	Search(arr, arr2, n); 
+	cout << endl;
+	cout << "Unique numbers: " << endl;
 	Unique(arr, n); Print(arr, n);
-	
 }
 
 void Rand(int arr[], const int n, int min, int max) 
@@ -87,27 +91,54 @@ void ShiftRight(int arr[], const int n, int numOfShifts)
 	}
 	cout << endl;
 }
-int Unique(int arr[], const int n)
+void Search(int arr[], int arr2[], const int n)
 {
+	
 	int min = minValueIn(arr, n);
-	int max = maxValueIn(arr, n) + 2;
-	bool random;
-	for (int i = 0; i < n;)
+	int max = maxValueIn(arr, n);
+	int count = 0;
+	while (max - min < n)max++;
+	for (int i = 0; i < n; i++)
 	{
-		random = false;
-		int ranVal = min + rand() % (max - min);
+		arr[i] = min + rand() % (max - min);
 		for (int j = 0; j < i; j++)
 		{
-			if (arr[j] == ranVal)
+			if (arr[i] == arr[j])count++;
+		}
+		arr2[i] = count; 
+		count = 0;
+	}
+	for (int i = 0; i < n; i++)
+	{
+		if (arr2[i] != 0)cout << arr[i] << "\t" << arr2[i] << endl;
+	}
+}
+int Unique(int arr[], const int n)
+{
+	bool random = false;
+	for (int i = 0; i < n;)
+	{
+		int min = minValueIn(arr, n);
+		int max = maxValueIn(arr, n);
+		while (max - min < n)max++;
+		bool random;
+		for (int i = 0; i < n;)
+		{
+			random = false;
+			int ranVal = rand() % (max - min) + (min);
+			for (int j = 0; j < i; j++)
 			{
-				random = true;
-				break;
+				if (arr[j] == ranVal)
+				{
+					random = true;
+					break;
+				}
+			}
+			if (random == false)
+			{
+				arr[i] = ranVal; i++;
 			}
 		}
-		if (random == false)
-		{ 
-			arr[i] = ranVal; i++;
-		}
+		return arr[n];
 	}
-	return arr[n];
 }
