@@ -110,6 +110,11 @@ void Search(int arr[], int arr2[], const int n)
 	}
 	for (int i = 0; i < n; i++)
 	{
+		for (int j = 0; j < n; j++)
+		{
+			if (arr[i] == arr[j])break;
+		}
+
 		if (arr2[i] != 0)cout << arr[i] << "\t" << arr2[i] << endl;
 	}
 }
