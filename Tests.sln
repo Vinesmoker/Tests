@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestsWithFunctions", "Tests
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestsWithArrays", "TestsWithArrays\TestsWithArrays.vcxproj", "{C8F265F2-B608-408A-B818-45406EC71C64}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SmallTests", "SmallTests\SmallTests.vcxproj", "{1A12B0CC-249C-4720-A3B7-04859C620622}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{C8F265F2-B608-408A-B818-45406EC71C64}.Release|x64.Build.0 = Release|x64
 		{C8F265F2-B608-408A-B818-45406EC71C64}.Release|x86.ActiveCfg = Release|Win32
 		{C8F265F2-B608-408A-B818-45406EC71C64}.Release|x86.Build.0 = Release|Win32
+		{1A12B0CC-249C-4720-A3B7-04859C620622}.Debug|x64.ActiveCfg = Debug|x64
+		{1A12B0CC-249C-4720-A3B7-04859C620622}.Debug|x64.Build.0 = Debug|x64
+		{1A12B0CC-249C-4720-A3B7-04859C620622}.Debug|x86.ActiveCfg = Debug|Win32
+		{1A12B0CC-249C-4720-A3B7-04859C620622}.Debug|x86.Build.0 = Debug|Win32
+		{1A12B0CC-249C-4720-A3B7-04859C620622}.Release|x64.ActiveCfg = Release|x64
+		{1A12B0CC-249C-4720-A3B7-04859C620622}.Release|x64.Build.0 = Release|x64
+		{1A12B0CC-249C-4720-A3B7-04859C620622}.Release|x86.ActiveCfg = Release|Win32
+		{1A12B0CC-249C-4720-A3B7-04859C620622}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

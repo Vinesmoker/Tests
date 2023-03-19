@@ -1,48 +1,123 @@
 #include<iostream>
+#include<Windows.h>
+#include<string>
 using namespace std;
+using std::cout;
+using std::cin;
+using std::endl;
 
-int Factorial(int f);
-double Pow(double num, int degree);
-void FibLimit(int lim, int a = 1, int b = 1);
-void FibQuantity(int quant, int count = 0, long a = 1, long b = 1);
+//#define Lesson
 
-void main ()
+int StringLength(const char str[]);
+void ToUpper(char str[]);
+void ToLower(char str[]);
+void Shrink(char str[]);
+bool Polindrome(const char str[]);
+void RemoveSymbol(const char str[], char symbol);
+bool IsIntNumber(const char str[]);
+
+void main()
 {
 	setlocale(LC_ALL, "");
-	int f; double num; int degree; int lim;
-	int quant;
-	cout << "Введите число для вычисления его факториала: "; cin >> f;
-	cout << "Результат: " << Factorial(f) << endl;
-	cout << "Введите число для возведения в степень: "; cin >> num;
-	cout << "Введите степень для возведения в нее числа " << num << ": "; cin >> degree;
-	cout << "Результат: " << Pow(num, degree) << endl;
-	cout << "Введите предельное число ряда Фибоначи: "; cin >> lim;
-	cout << "Результат: "; FibLimit(lim); cout << endl;
-	cout << "Введите необходимое количество элементов ряда Фибоначи: "; cin >> quant;
-	cout << "Результат: " << endl;
-	FibQuantity(quant);
+#ifdef Lesson
+	cout << "Hello Strings!";
+	char str[] = { 'H', 'e', 'l', 'l', 'o', '\0' }; //Можно просто 0 - типа int, он ужмется до 1 бита и будет char.
+	char str[] = "Hello";
+	cout << str << endl;
+	cout << sizeof(str) << endl;
+
+	const int n = 20;
+	char str[n] = {};
+	cout << "Введите строку: ";
+	SetConsoleCP(1251);
+	cin.getline(str, n);
+	SetConsoleCP(866); // - это не обязательно в последней версии студии.
+	cout << str << endl;
+#endif // Lesson
+
+	const int n = 256;
+	
+	char str[n] = { "1"};
+	//cout << "Введите строку: ";
+	SetConsoleCP(1251);
+	//cin.getline(str, n);
+	SetConsoleCP(866); // - это не обязательно в последней версии студии.
+	cout << "Вы ввели строку:\n" << str << " длиной " << StringLength(str) << " символов" << endl;
+	ToUpper(str);
+	ToLower(str);
+	Shrink(str);
+	cout << str << endl;
+	cout << "Строка " << (Polindrome(str) ? "" : " не ") << "палиндром: ";
+	cout << str << endl;
+	cout << IsIntNumber(str);
 }
 
-int Factorial(int f)
+
+int StringLength(const char str[])
 {
-	if (f == 0)return 1;
-	else return f * Factorial(f - 1);
+	int i = 0;
+	for (; str[i]; i++);
+	return i;
 }
-double Pow(double num, int degree)
+void ToUpper(char str[])
 {
-	if (degree == 0)return 1;
-	if (degree < 0)return 1 / num * Pow(num, degree + 1);
-	else return num * Pow(num, degree - 1);
+
+	for (int i = 0; i < str[i]; i++)
+	{
+		if (str[i] >= 'a' && str[i] <= 'z')str[i] -= ' ';
+		if (str[i] >= 'а' && str[i] <= 'я')str[i] -= ' ';
+		cout << str[i];
+	}
+	cout << endl;
+
+	//for (int i = 0; str[i]; i++)str[i] = toupper(str[i]);
 }
-void FibLimit(int lim, int a, int b)
+void ToLower(char str[])
 {
-	if (a > lim)return;
-	cout << a << "\t";
-	FibLimit(lim, b, a + b);
+	for (int i = 0; str[i]; i++)str[i] = tolower(str[i]);
 }
-void FibQuantity(int quant, int count, long a, long b)
+void Shrink(char str[])
 {
-	if (count > quant)return;
-	cout << count << "\t" << a << "\n";
-	FibQuantity(quant, count + 1, b, a + b);
+	for (int i = 0; i < str[i]; i++)
+	{
+		while (str[i] == ' ' && str[i + 1] == ' ')
+		{
+			for (int j = i; j < str[j]; j++)
+			{
+				str[j] = str[j + 1];
+			}
+		}
+	}
+}
+void RemoveSymbol(char str[], char symbol)
+{
+	for (int i = 0; i < str[i]; i++)
+	{
+		while (str[i] == symbol)
+		{
+			for (int j = i; str[j]; j++) str[j] = str[j + 1];
+		}
+	}
+}
+bool Polindrome(const char str[])
+{
+	char* buffer = new char[strlen(str) + 1] {};
+	for (int i = 0; i < strlen(str); i++)buffer[i] = str[i];
+	ToLower(buffer);
+	RemoveSymbol(buffer, ' ');
+	int n = strlen(buffer);
+	for (int i = 0; i < n / 2; i++)
+	{
+		if (buffer[i] != buffer[n - 1 - i])
+		{
+			delete[] buffer;
+			return false;
+		}
+	}
+	delete[] buffer;
+	return true;
+}
+bool IsIntNumber(const char str[])
+{
+	return 0;
 }
