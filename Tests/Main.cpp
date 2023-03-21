@@ -14,7 +14,9 @@ void ToLower(char str[]);
 void Shrink(char str[]);
 bool Polindrome(const char str[]);
 void RemoveSymbol(const char str[], char symbol);
-bool IsIntNumber(const char str[]);
+bool IsIntNumber(const std::string& str);
+int OutputIntNumber(int arg1, char* arg2[]);
+
 
 void main()
 {
@@ -36,8 +38,8 @@ void main()
 #endif // Lesson
 
 	const int n = 256;
-	
-	char str[n] = { "1"};
+	int arg1; int arg2[size];
+	char str[n] = { "sdfsdfsdf"};
 	//cout << "Введите строку: ";
 	SetConsoleCP(1251);
 	//cin.getline(str, n);
@@ -49,7 +51,7 @@ void main()
 	cout << str << endl;
 	cout << "Строка " << (Polindrome(str) ? "" : " не ") << "палиндром: ";
 	cout << str << endl;
-	cout << IsIntNumber(str);
+	cout << IsIntNumber(str) << endl; cout << OutputIntNumber(arg1, arg2[size]);
 }
 
 
@@ -117,7 +119,34 @@ bool Polindrome(const char str[])
 	delete[] buffer;
 	return true;
 }
-bool IsIntNumber(const char str[])
+bool IsIntNumber(const std::string& str)
 {
+	if (str.empty())
+	{
+		return false;
+	}
+	for (char c: str)
+	{
+		if (!isdigit(c))return false;
+	}
+	return true;
+}
+int OutputIntNumber(int arg1, char* arg2[])
+{
+	if (arg1 <= 1) {
+		std::cout << "Usage: " << arg2[0] << " number\n";
+		return 1;
+	}
+
+	std::string str = arg2[1];
+
+	if (IsIntNumber(str)) {
+		int num = std::atoi(str.c_str());
+		std::cout << "The number is: " << num << '\n';
+	}
+	else {
+		std::cout << "Invalid input: " << str << " is not a decimal number\n";
+	}
+
 	return 0;
 }
